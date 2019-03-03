@@ -1,0 +1,5 @@
+FROM redis:5.0.3-alpine3.9
+
+MAINTAINER Yowko Tsai <yowko@yowko.com>
+
+ENTRYPOINT echo "yes"|redis-cli -a pass.123 --cluster create 172.19.0.2:6379 172.19.0.3:6379 172.19.0.4:6379 172.19.0.5:6379 172.19.0.6:6379 172.19.0.7:6379 --cluster-replicas 1
