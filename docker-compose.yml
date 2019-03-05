@@ -13,7 +13,7 @@ services:
     container_name: redis-slave1
     build: dockernode
     command: redis-server --slaveof redis-master1 6379
-    links:
+    depends_on:
       - redis-master1
     networks:
          extnetwork:
@@ -30,7 +30,7 @@ services:
     container_name: redis-slave2
     build: dockernode
     command: redis-server --slaveof redis-master2 6379
-    links: 
+    depends_on: 
       - redis-master2
     networks:
          extnetwork:
@@ -47,7 +47,7 @@ services:
     container_name: redis-slave3
     build: dockernode
     command: redis-server --slaveof redis-master3 6379
-    links: 
+    depends_on: 
       - redis-master3
     networks:
          extnetwork:
@@ -58,7 +58,7 @@ services:
     build: createnode
     networks:
          extnetwork:
-    links:
+    depends_on:
       - redis-master1
       - redis-master2
       - redis-master3
@@ -71,7 +71,7 @@ services:
     build: sentinel
     networks:
          extnetwork:
-    links: 
+    depends_on: 
       - redis-master1
       - redis-master2
       - redis-master3
@@ -84,7 +84,7 @@ services:
     build: sentinel
     networks:
          extnetwork:
-    links: 
+    depends_on: 
       - redis-master1
       - redis-master2
       - redis-master3
